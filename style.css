@@ -333,8 +333,6 @@ footer {
   transform: translateY(0);
 }
 
-/* Responsive fixes for top bar only */
-/* Top Bar Full Mobile Responsiveness */
 @media screen and (max-width: 768px) {
   .topbar {
     padding: 30px 15px;
@@ -356,11 +354,12 @@ footer {
     font-size: 1.6rem;
   }
 
-  .typewriter {
-    font-size: 0.95rem;
-    white-space: normal; /* allow wrapping */
-    border-right: none; /* optional, easier on small screens */
-  }
+.typewriter {
+  font-size: 1.1rem;
+  white-space: nowrap;       /* keep typing effect */
+  overflow: hidden;
+  text-overflow: ellipsis;   /* cut if too long */
+}
 
   .top-buttons {
     flex-direction: column;
