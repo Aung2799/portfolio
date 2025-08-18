@@ -183,7 +183,7 @@ body {
 }
 
 section {
-  margin-bottom: 50px; /* tightened spacing */
+  margin-bottom: 50px;
 }
 
 h2 {
@@ -333,18 +333,57 @@ footer {
   transform: translateY(0);
 }
 
-/* Responsive */
+/* Responsive fixes for top bar only */
+/* Top Bar Full Mobile Responsiveness */
 @media screen and (max-width: 768px) {
-  .topbar img {
-    margin-bottom: 20px;
+  .topbar {
+    padding: 30px 15px;
+    text-align: center;
   }
+
+  .topbar img.profile-pic {
+    width: 90px;
+    height: 90px;
+    margin-bottom: 15px;
+  }
+
+  .info {
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  .animated-name {
+    font-size: 1.6rem;
+  }
+
+  .typewriter {
+    font-size: 0.95rem;
+    white-space: normal; /* allow wrapping */
+    border-right: none; /* optional, easier on small screens */
+  }
+
   .top-buttons {
-    display: flex;
     flex-direction: column;
     gap: 10px;
+    justify-content: center;
+    margin: 15px 0;
   }
+
+  .top-buttons .btn {
+    width: 80%; /* buttons fill most of screen */
+    text-align: center;
+    margin: 0 auto;
+  }
+
   .contact {
     flex-direction: column;
-    gap: 12px;
+    gap: 8px;
+    font-size: 0.85rem;
+  }
+
+  .socials {
+    gap: 10px;
+    margin-top: 10px;
   }
 }
+
