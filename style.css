@@ -15,7 +15,6 @@ body {
   line-height: 1.7;
 }
 
-/* Hero / Top Bar */
 .topbar {
   display: flex;
   flex-direction: column;
@@ -44,7 +43,6 @@ body {
   transform: scale(1.05);
 }
 
-/* Animated Gradient Name */
 .animated-name {
   font-size: 2.8rem;
   font-weight: 800;
@@ -68,7 +66,6 @@ body {
   }
 }
 
-/* Typewriter Title */
 .typewriter {
   font-size: 1.3rem;
   font-weight: 500;
@@ -356,9 +353,9 @@ footer {
 
 .typewriter {
   font-size: 1.1rem;
-  white-space: nowrap;       /* keep typing effect */
+  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;   /* cut if too long */
+  text-overflow: ellipsis;
 }
 
   .top-buttons {
@@ -369,7 +366,7 @@ footer {
   }
 
   .top-buttons .btn {
-    width: 80%; /* buttons fill most of screen */
+    width: 80%;
     text-align: center;
     margin: 0 auto;
   }
