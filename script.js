@@ -1,6 +1,3 @@
-// Typewriter is handled in CSS
-
-// Animate skill bars on scroll
 function animateSkills() {
   const skills = document.querySelectorAll(".progress");
   skills.forEach((skill) => {
