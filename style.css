@@ -223,8 +223,40 @@ footer{
   .top-buttons{ flex-direction:column; gap:10px; justify-content:center; margin:15px 0; }
   .top-buttons .btn{ width:80%; text-align:center; margin:0 auto; }
   .contact{ flex-direction:column; gap:8px; font-size:.9rem; }
-  .nav { padding: 6px 14px; }
-  .nav .links { gap: 8px;}
-  .nav .links a { font-size: 0.9rem; margin: 0 4px; }
-  #themeToggle { font-size: 0.9rem; padding: 4px; }
+  .nav {
+    /* keep the bar short */
+    padding: 6px 12px;        /* smaller top/bottom padding */
+    line-height: 1.1;         /* tighter line height */
+    height: auto;             /* allow natural height */
+    min-height: unset;        /* prevent enforced tall bars */
+    display: flex;
+    align-items: center;      /* vertically center items */
+    gap: 8px;
+  }
+
+  .nav .links {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: nowrap;        /* prevent wrapping to 2nd line (key!) */
+    overflow-x: auto;         /* allow horizontal scroll if needed */
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;    /* hide scrollbar (Firefox) */
+  }
+  .nav .links::-webkit-scrollbar { display: none; } /* hide scrollbar (WebKit) */
+
+  .nav .links a {
+    white-space: nowrap;      /* keep each link on one line */
+    font-size: 0.9rem;        /* slightly smaller text on mobile */
+    padding: 6px 8px;         /* compact tap target */
+    margin: 0;                /* avoid stacking extra margin */
+    line-height: 1.1;
+  }
+
+  #themeToggle,
+  .nav .actions button,
+  .nav .actions .icon-btn {
+    padding: 4px 6px;
+    line-height: 1;
+  }
 }
