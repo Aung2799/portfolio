@@ -1,20 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="top">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Aung Kaung Myat | Portfolio</title>
 
     <!-- SEO & Social Sharing -->
-    <meta
-      name="description"
-      content="Portfolio of Aung Kaung Myat - Full-Stack Developer, UI/UX Enthusiast, and Problem Solver in Singapore."
-    />
+    <meta name="description" content="Portfolio of Aung Kaung Myat - Full-Stack Developer, UI/UX Enthusiast, and Problem Solver in Singapore." />
     <meta property="og:title" content="Aung Kaung Myat | Portfolio" />
-    <meta
-      property="og:description"
-      content="Full-Stack Developer portfolio showcasing web apps, UI/UX design, and projects."
-    />
+    <meta property="og:description" content="Full-Stack Developer portfolio showcasing web apps, UI/UX design, and projects." />
     <meta property="og:image" content="profile.webp" />
     <meta property="og:type" content="website" />
 
@@ -28,45 +22,48 @@
     />
   </head>
   <body>
+    <!-- Sticky Nav -->
+    <nav class="nav">
+      <a href="#top" class="brand">AKM</a>
+      <div class="links">
+        <a href="#about">About</a>
+        <a href="#education">Education</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+        <button id="themeToggle" aria-label="Toggle theme" title="Theme: Auto">
+  <i id="themeIcon" class="fa-solid fa-circle-half-stroke"></i>
+</button>
+      </div>
+    </nav>
+
     <!-- Hero / Top Bar -->
     <header class="topbar">
       <img src="profile.webp" alt="Aung Kaung Myat" class="profile-pic" />
       <div class="info">
         <h1 class="animated-name">Aung Kaung Myat</h1>
-        <p class="title typewriter">
-          Full-Stack Developer | UI/UX Enthusiast | Problem Solver
+
+        <!-- Rotating subtitle -->
+        <p class="title rotating" id="rotatingTitle"
+           data-roles='["Full-Stack Developer","UI/UX Enthusiast","Problem Solver"]'>
+          Full-Stack Developer
         </p>
+
         <div class="top-buttons">
           <a href="resume.pdf" class="btn" target="_blank">Download Resume</a>
           <a href="#contact" class="btn btn-secondary">Contact Me</a>
         </div>
 
         <div class="contact">
-          <p>
-            <i class="fas fa-envelope"></i>
-            <a href="mailto:Aungkaungmyat276999@gmail.com"
-              >Aungkaungmyat276999@gmail.com</a
-            >
-          </p>
-          <p>
-            <i class="fas fa-phone"></i>
-            <a href="tel:+6584601850">+65 8460 1850</a>
-          </p>
+          <p><i class="fas fa-envelope"></i><a href="mailto:Aungkaungmyat276999@gmail.com">Aungkaungmyat276999@gmail.com</a></p>
+          <p><i class="fas fa-phone"></i><a href="tel:+6584601850">+65 8460 1850</a></p>
           <p><i class="fas fa-map-marker-alt"></i> Singapore</p>
         </div>
 
         <div class="socials">
-          <a href="https://github.com/Aung2799" target="_blank"
-            ><i class="fab fa-github"></i
-          ></a>
-          <a
-            href="https://www.linkedin.com/in/aung-kaung-myat-7a187b318/"
-            target="_blank"
-            ><i class="fab fa-linkedin"></i
-          ></a>
-          <a href="https://wa.me/6584601850" target="_blank" rel="noopener"
-            ><i class="fab fa-whatsapp"></i
-          ></a>
+          <a href="https://github.com/Aung2799" target="_blank"><i class="fab fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/aung-kaung-myat-7a187b318/" target="_blank"><i class="fab fa-linkedin"></i></a>
+          <a href="https://wa.me/6584601850" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
         </div>
       </div>
     </header>
@@ -74,7 +71,7 @@
     <!-- Main Content -->
     <main class="main-content">
       <!-- About -->
-      <section class="about fade-in">
+      <section id="about" class="about fade-in">
         <h2>Profile</h2>
         <p>
           Passionate Higher Diploma student with a solid foundation in software
@@ -82,96 +79,97 @@
           programming and UX skills in real-world environments. Known for being
           collaborative, adaptable, and committed to continuous improvement.
         </p>
+
+        <!-- Quick stats -->
+        <ul class="stats">
+          <li><strong>3</strong> Projects</li>
+          <li><strong>Full-Stack</strong> Focus</li>
+          <li><strong>2025</strong> Grad</li>
+        </ul>
+      </section>
+
+      <!-- Education -->
+      <section id="education" class="education fade-in">
+        <h2>Education</h2>
+        <div class="edu-item">
+          <h3>BSc (Hons) in Computer Networks</h3>
+          <p>Auston University / Liverpool John Moores University (2022 – 2025)</p>
+        </div>
+        <div class="edu-item">
+          <h3>Ever Safe Academy (Singapore)</h3>
+          <p>2024 – Present</p>
+        </div>
+        <div class="edu-item">
+          <h3>Myanmar Maritime University</h3>
+          <p>2015 – 2019</p>
+        </div>
+        <div class="edu-item">
+          <h3>B.E.H.S 14, Mandalay</h3>
+          <p>2014 – 2015</p>
+        </div>
       </section>
 
       <!-- Projects -->
-      <section class="projects fade-in">
+      <section id="projects" class="projects fade-in">
         <h2>Projects</h2>
 
-        <div class="project-card">
-          <img
-            src="string-theory.png"
-            alt="String Theory Project Screenshot"
-            class="project-img"
-          />
-          <h3>String Theory – Guitar Chord Library Web App</h3>
-          <p>
-            Full-stack web app to display song lyrics with aligned chords,
-            inspired by E-Chords. Built admin panel for manual uploads with
-            chord transposition and responsive light/dark theme.
-          </p>
-          <p class="tech-stack">
-            <span>PHP</span> <span>MySQL</span> <span>JavaScript</span>
-            <span>HTML</span> <span>CSS</span>
-          </p>
-          <div class="project-links">
-            <a href="#" class="btn btn-project" target="_blank">Live Demo</a>
-            <a
-              href="https://github.com/Aung2799"
-              class="btn btn-secondary"
-              target="_blank"
-              >Source Code</a
-            >
+        <div class="grid">
+          <div class="project-card">
+            <img src="string-theory.png" alt="String Theory Project Screenshot" class="project-img" />
+            <h3>String Theory – Guitar Chord Library Web App <span class="date">Apr–Jun 2025</span></h3>
+            <p>
+              Full-stack web app that displays song lyrics with aligned chords,
+              inspired by E-Chords. Designed an admin panel for manual uploads
+              with chord transposition via <code>data-chord</code> spans.
+              Includes light/dark mode toggle and responsive design.
+            </p>
+            <p class="tech-stack">
+              <span>PHP</span> <span>MySQL</span> <span>JavaScript</span> <span>HTML</span> <span>CSS</span>
+            </p>
+            <div class="project-links">
+              <a href="#" class="btn btn-project" target="_blank">Live Demo</a>
+              <a href="https://github.com/Aung2799" class="btn btn-secondary" target="_blank">Source Code</a>
+            </div>
           </div>
-        </div>
 
-        <div class="project-card">
-          <img
-            src="wellbeing.png"
-            alt="Well-Being Website Screenshot"
-            class="project-img"
-          />
-          <h3>Well-Being Website – Mental Health Tracker</h3>
-          <p>
-            Mental health support tool with daily happiness, workload, and
-            anxiety ratings. Sends therapist alert if scores drop for 3 days.
-            Includes motivational quote generator.
-          </p>
-          <p class="tech-stack">
-            <span>PHP</span> <span>MySQL</span> <span>JavaScript</span>
-            <span>HTML</span> <span>CSS</span>
-          </p>
-          <div class="project-links">
-            <a href="#" class="btn btn-project" target="_blank">Live Demo</a>
-            <a
-              href="https://github.com/Aung2799"
-              class="btn btn-secondary"
-              target="_blank"
-              >Source Code</a
-            >
+          <div class="project-card">
+            <img src="wellbeing.png" alt="Well-Being Website Screenshot" class="project-img" />
+            <h3>Well-Being Website – Mental Health Tracker <span class="date">Jul–Aug 2024</span></h3>
+            <p>
+              Users rate happiness, workload, and anxiety daily; alerts trigger if a score stays below 2 for 3 days.
+              Includes a daily motivational quote generator.
+            </p>
+            <p class="tech-stack">
+              <span>PHP</span> <span>MySQL</span> <span>JavaScript</span> <span>HTML</span> <span>CSS</span>
+            </p>
+            <div class="project-links">
+              <a href="#" class="btn btn-project" target="_blank">Live Demo</a>
+              <a href="https://github.com/Aung2799" class="btn btn-secondary" target="_blank">Source Code</a>
+            </div>
           </div>
-        </div>
 
-        <div class="project-card">
-          <img
-            src="movie-app.png"
-            alt="Movie Overview Website Screenshot"
-            class="project-img"
-          />
-          <h3>Movie Overview Website (TMDB API)</h3>
-          <p>
-            Dynamic site using TMDB API to list movies with search, filters, and
-            detail pages. Focused on JSON, APIs, and responsive UI.
-          </p>
-          <p class="tech-stack">
-            <span>JavaScript</span> <span>HTML</span> <span>CSS</span>
-            <span>Bootstrap</span>
-          </p>
-          <div class="project-links">
-            <a href="#" class="btn btn-project" target="_blank">Live Demo</a>
-            <a
-              href="https://github.com/Aung2799"
-              class="btn btn-secondary"
-              target="_blank"
-              >Source Code</a
-            >
+          <div class="project-card">
+            <img src="movie-app.png" alt="Movie Overview Website Screenshot" class="project-img" />
+            <h3>Movie Overview Website (TMDB API) <span class="date">Apr–May 2024</span></h3>
+            <p>
+              Real-time movie titles, posters, ratings, and details using TMDB. Live search, genre filters,
+              and detail pages with Bootstrap.
+            </p>
+            <p class="tech-stack">
+              <span>JavaScript</span> <span>HTML</span> <span>CSS</span> <span>Bootstrap</span>
+            </p>
+            <div class="project-links">
+              <a href="#" class="btn btn-project" target="_blank">Live Demo</a>
+              <a href="https://github.com/Aung2799" class="btn btn-secondary" target="_blank">Source Code</a>
+            </div>
           </div>
         </div>
       </section>
 
       <!-- Skills -->
-      <section class="skills fade-in">
+      <section id="skills" class="skills fade-in">
         <h2>Skills</h2>
+        <!-- Progress Bars -->
         <div class="skill-bar">
           <h3><i class="fab fa-php"></i> PHP</h3>
           <div class="bar"><div class="progress" data-width="90%"></div></div>
@@ -188,12 +186,82 @@
           <h3><i class="fas fa-database"></i> MySQL</h3>
           <div class="bar"><div class="progress" data-width="80%"></div></div>
         </div>
+
+        <!-- Expanded Skills -->
+        <div class="extra-skills">
+          <h3>Languages</h3>
+          <p>PHP, Python, JavaScript, HTML, CSS, SQL, C, C++</p>
+
+          <h3>Frameworks & Libraries</h3>
+          <p>Bootstrap, jQuery, Node.js</p>
+
+          <h3>Tools & Platforms</h3>
+          <p>Git, GitHub, VS Code, XAMPP, MySQL, phpMyAdmin, MongoDB</p>
+
+          <h3>Concepts</h3>
+          <p>CRUD, MVC Architecture, Responsive Design</p>
+        </div>
       </section>
 
-      <!-- Hidden sections for now -->
-      <section class="education-certificates fade-in hidden"></section>
-      <section class="languages-hobbies fade-in hidden"></section>
-      <section class="cta fade-in hidden"></section>
+      <!-- Courses -->
+      <section class="courses fade-in">
+        <h2>Courses</h2>
+        <ul>
+          <li>Web Development and Design</li>
+          <li>Network Security and Administration</li>
+          <li>Database Management Systems</li>
+          <li>Algorithms and Data Structures</li>
+          <li>Frontend Development – FreeCodeCamp (In Progress)</li>
+        </ul>
+      </section>
+
+      <!-- Certificates -->
+      <section class="certificates fade-in">
+        <h2>Certificates</h2>
+        <div class="certificates-list">
+          <span>Web Development and Design</span>
+          <span>MikroTik Certified Network Associate</span>
+          <span>Wall Street English – Level 19</span>
+        </div>
+      </section>
+
+      <!-- Soft Skills -->
+      <section class="soft-skills fade-in">
+        <h2>Soft Skills</h2>
+        <ul>
+          <li>⚡ Fast Learner</li>
+          <li>🤝 Team Collaboration</li>
+          <li>🗣 Technical Communication</li>
+          <li>🚀 Self-Driven</li>
+          <li>🎨 Creative Problem Solving</li>
+        </ul>
+      </section>
+
+      <!-- Languages & Hobbies -->
+      <section class="languages-hobbies fade-in">
+        <h2>Languages & Hobbies</h2>
+        <div class="lang-hobbies">
+          <div>
+            <h3>Languages</h3>
+            <p>🇲🇲 Burmese – Native</p>
+            <p>🇬🇧 English – Professional Proficiency</p>
+          </div>
+          <div>
+            <h3>Hobbies</h3>
+            <p>💻 Tech Reviews</p>
+            <p>🎨 UI Design</p>
+            <p>🍳 Cooking</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact" class="cta fade-in">
+        <h2>Let’s Work Together</h2>
+        <p>Feel free to reach out for collaborations or opportunities.</p>
+        <a href="mailto:Aungkaungmyat276999@gmail.com" class="btn">Email Me</a>
+        <a href="https://wa.me/6584601850" target="_blank" class="btn btn-secondary">WhatsApp</a>
+      </section>
     </main>
 
     <!-- Footer -->
