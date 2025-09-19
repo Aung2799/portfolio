@@ -223,4 +223,8 @@ footer{
   .top-buttons{ flex-direction:column; gap:10px; justify-content:center; margin:15px 0; }
   .top-buttons .btn{ width:80%; text-align:center; margin:0 auto; }
   .contact{ flex-direction:column; gap:8px; font-size:.9rem; }
+  .nav { padding: 6px 14px; }
+  .nav .links { gap: 8px;}
+  .nav .links a { font-size: 0.9rem; margin: 0 4px; }
+  #themeToggle { font-size: 0.9rem; padding: 4px; }
 }
