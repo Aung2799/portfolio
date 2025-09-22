@@ -1,118 +1,63 @@
-// ===== Theme toggle (light <-> dark) — robust, no reset on nav clicks =====
+// script.js
+
+// ===== Theme Toggle =====
 const themeToggle = document.getElementById("themeToggle");
 const themeIcon = document.getElementById("themeIcon");
+const root = document.documentElement;
 
-function applyThemeVars(t) {
-  document.documentElement.setAttribute("data-theme", t);
-  if (themeIcon) {
-    themeIcon.className = "fa-solid " + (t === "dark" ? "fa-moon" : "fa-sun");
-  }
-  if (themeToggle) {
-    themeToggle.title = t === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode";
-    themeToggle.setAttribute("aria-label", `Switch theme (current: ${t === "dark" ? "Dark" : "Light"})`);
-  }
+// Load saved theme (if any)
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme) {
+  root.setAttribute("data-theme", savedTheme);
+  themeIcon.className =
+    savedTheme === "dark" ? "fa-solid fa-moon" : "fa-solid fa-sun";
+} else {
+  // default theme = light
+  root.setAttribute("data-theme", "light");
 }
 
-function setTheme(t) {
-  localStorage.setItem("theme", t);
-  applyThemeVars(t);
-}
+// Toggle theme on button click
+themeToggle.addEventListener("click", () => {
+  const current = root.getAttribute("data-theme");
+  const next = current === "dark" ? "light" : "dark";
 
-// Init: prefer existing HTML attr, else saved, else default once
-(function initTheme() {
-  const existing = document.documentElement.getAttribute("data-theme");
-  if (existing === "light" || existing === "dark") {
-    applyThemeVars(existing);
-    return;
-  }
-  const saved = localStorage.getItem("theme");
-  if (saved === "light" || saved === "dark") {
-    applyThemeVars(saved);
-    return;
-  }
-  setTheme("light");
-})();
+  root.setAttribute("data-theme", next);
+  localStorage.setItem("theme", next);
 
-// Toggle on click
-themeToggle?.addEventListener("click", () => {
-  const current =
-    localStorage.getItem("theme") ||
-    document.documentElement.getAttribute("data-theme") ||
-    "light";
-  setTheme(current === "dark" ? "light" : "dark");
+  themeIcon.className =
+    next === "dark" ? "fa-solid fa-moon" : "fa-solid fa-sun";
 });
 
-// Guard against accidental resets on hash changes
-window.addEventListener("hashchange", () => {
-  const t =
-    localStorage.getItem("theme") ||
-    document.documentElement.getAttribute("data-theme") ||
-    "light";
-  applyThemeVars(t);
+// ===== Progress Bars Animation =====
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".progress").forEach((bar) => {
+    const width = bar.getAttribute("data-width");
+    setTimeout(() => {
+      bar.style.width = width;
+      bar.classList.add("filled");
+    }, 200);
+  });
 });
 
-// ===== Rotating subtitle =====
-(function rotateTitle() {
-  const el = document.getElementById("rotatingTitle");
-  if (!el) return;
-  let roles = [];
-  try {
-    roles = JSON.parse(el.getAttribute("data-roles") || "[]");
-  } catch {
-    roles = [];
-  }
-  if (!roles.length) return;
-
+// ===== Rotating Title =====
+const rotatingTitle = document.getElementById("rotatingTitle");
+if (rotatingTitle) {
+  const roles = JSON.parse(rotatingTitle.dataset.roles || "[]");
   let i = 0;
   setInterval(() => {
-    i = (i + 1) % roles.length;
-    el.style.opacity = "0";
-    el.style.transform = "translateY(4px)";
+    rotatingTitle.style.opacity = 0;
     setTimeout(() => {
-      el.textContent = roles[i];
-      el.style.opacity = "1";
-      el.style.transform = "translateY(0)";
-    }, 180);
-  }, 2200);
-})();
-
-// ===== Skill bar animation =====
-function animateSkills() {
-  const skills = document.querySelectorAll(".progress");
-  const winH = window.innerHeight;
-  skills.forEach((skill) => {
-    const rect = skill.getBoundingClientRect();
-    if (rect.top < winH - 50 && !skill.classList.contains("filled")) {
-      skill.style.width = skill.dataset.width || "0%";
-      skill.classList.add("filled");
-    }
-  });
+      rotatingTitle.textContent = roles[i];
+      rotatingTitle.style.opacity = 1;
+      i = (i + 1) % roles.length;
+    }, 250);
+  }, 3000);
 }
 
-// ===== Fade-in sections =====
-function fadeInSections() {
-  const sections = document.querySelectorAll(".fade-in");
-  const winH = window.innerHeight;
-  sections.forEach((section) => {
-    const rect = section.getBoundingClientRect();
-    if (rect.top < winH - 50) {
-      section.classList.add("visible");
-    }
+// ===== Scroll-to-Top Button =====
+const scrollTopBtn = document.getElementById("scrollTop");
+if (scrollTopBtn) {
+  scrollTopBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   });
 }
-
-// ===== Scroll-to-top button =====
-const scrollBtn = document.getElementById("scrollTop");
-scrollBtn?.addEventListener("click", () => {
-  window.scrollTo({ top: 0, behavior: "smooth" });
-});
-
-// ===== Run on load + scroll =====
-window.addEventListener("load", () => {
-  animateSkills();
-  fadeInSections();
-});
-window.addEventListener("scroll", () => {
-  animateSkills();
-  fadeInSections();
-});
