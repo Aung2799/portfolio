@@ -1,4 +1,3 @@
-// ===== Theme toggle (light <-> dark) — robust, no reset on nav clicks =====
 const themeToggle = document.getElementById("themeToggle");
 const themeIcon = document.getElementById("themeIcon");
 
