@@ -1,11 +1,296 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>String Theory — Project Demo</title>
+  <meta name="description" content="String Theory: a guitar chord library with scraping, transpose, auto‑scroll, favorites, and clean UI." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #ffffff; /* Light background */
+      --fg: #0b0b0c; /* Light text */
+      --muted: #6b7280;
+      --card: #f6f7f8;
+      --border: #e5e7eb;
+      --brand: #0ea5e9; /* cyan-500 */
+      --brand-2: #f59e0b; /* amber-500 */
+      --shadow: 0 10px 30px rgba(0,0,0,.06);
+    }
+    [data-theme="dark"]{
+      --bg: #0b0b0c; /* Dark background */
+      --fg: #f2f3f5; /* Dark text */
+      --muted: #9aa3af;
+      --card: #121316;
+      --border: #1f2126;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+    }
+    a{color:var(--fg); text-decoration:none}
+    .container{max-width:1100px; margin:0 auto; padding:24px}
+
+    /* Topbar */
+    .topbar{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:10px 0}
+    .back{display:inline-flex; align-items:center; gap:10px; padding:10px 14px; border:1px solid var(--border); border-radius:14px; background:transparent; cursor:pointer}
+    .back:hover{transform:translateY(-1px)}
+    .theme{display:inline-flex; align-items:center; gap:10px; padding:10px 14px; border:1px solid var(--border); border-radius:14px; background:transparent; cursor:pointer}
+
+    /* Hero */
+    .hero{display:grid; grid-template-columns:1.2fr .8fr; gap:28px; align-items:center; padding:22px; border:1px solid var(--border); border-radius:18px; background:linear-gradient(160deg, var(--card), transparent 70%); box-shadow:var(--shadow)}
+    .title{font-size:42px; line-height:1.1; margin:0 0 8px; font-weight:800}
+    .subtitle{color:var(--muted); margin:0 0 18px}
+    .badges{display:flex; flex-wrap:wrap; gap:10px; margin:14px 0 18px}
+    .badge{font-size:12px; padding:6px 10px; border:1px solid var(--border); border-radius:999px; background:var(--card)}
+    .cta{display:flex; flex-wrap:wrap; gap:12px}
+    .btn{display:inline-flex; align-items:center; gap:10px; padding:12px 16px; border-radius:14px; border:1px solid var(--border); background:var(--fg); color:var(--bg); font-weight:600}
+    .btn.secondary{background:transparent; color:var(--fg)}
+    .cover{border-radius:16px; overflow:hidden; border:1px solid var(--border); background:var(--card); min-height:260px; display:grid; place-items:center}
+    .cover img{max-width:100%; height:auto; display:block}
+
+    /* Section */
+    section{margin:40px 0}
+    .section-title{font-size:24px; margin:0 0 12px}
+    .section-sub{color:var(--muted); margin:0 0 20px}
+
+    /* Features grid */
+    .grid{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:16px}
+    .card{border:1px solid var(--border); background:var(--card); border-radius:16px; padding:16px; box-shadow:var(--shadow)}
+    .card h3{margin:4px 0 8px; font-size:18px}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}
+
+    /* Tech chips */
+    .chips{display:flex; flex-wrap:wrap; gap:10px}
+    .chip{border:1px solid var(--border); background:var(--card); padding:8px 12px; border-radius:999px; font-size:13px}
+
+    /* Media */
+    .media{display:grid; grid-template-columns: 1fr 1fr; gap:16px}
+    .media .frame{aspect-ratio:16/9; background:var(--card); border:1px solid var(--border); border-radius:16px; overflow:hidden; display:grid; place-items:center}
+    .frame img{width:100%; height:100%; object-fit:cover}
+    .frame video{width:100%; height:100%; display:block}
+
+    /* How it works */
+    .steps{display:grid; grid-template-columns:repeat(3, 1fr); gap:16px}
+    .step{border-left:3px solid var(--brand); padding:12px 14px; background:var(--card); border-radius:12px; border:1px solid var(--border)}
+    .step strong{display:block; font-size:14px; margin-bottom:6px}
+
+    /* Code sample */
+    pre{margin:0; white-space:pre-wrap}
+    .code{background:var(--bg); border:1px dashed var(--border); border-radius:12px; padding:14px}
+
+    /* FAQ */
+    details{border:1px solid var(--border); background:var(--card); padding:12px 14px; border-radius:14px}
+    details+details{margin-top:10px}
+    summary{cursor:pointer; font-weight:600}
+
+    /* Footer */
+    footer{border-top:1px solid var(--border); margin-top:40px; padding-top:20px; color:var(--muted); font-size:14px}
+
+    /* Responsive */
+    @media (max-width: 900px){
+      .hero{grid-template-columns:1fr}
+      .media{grid-template-columns:1fr}
+      .steps{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+    }
+  </style>
 </head>
 <body>
-    
+  <div class="container">
+    <div class="topbar">
+      <a class="back" href="/index.html" aria-label="Back to portfolio">← Back to Portfolio</a>
+      <button id="themeToggle" class="theme" title="Switch theme" aria-label="Switch theme">
+        <span id="themeLabel">Light</span> / Dark
+      </button>
+    </div>
+
+    <header class="hero" aria-labelledby="project-title">
+      <div>
+        <h1 id="project-title" class="title">String Theory</h1>
+        <p class="subtitle">Guitar chord library with scraping, transpose, auto‑scroll, favorites, and a fast, clean UI.</p>
+        <div class="badges">
+          <span class="badge">PHP + MySQL</span>
+          <span class="badge">JavaScript</span>
+          <span class="badge">Node.js + Puppeteer scraping</span>
+          <span class="badge">Light/Dark</span>
+          <!-- <span class="badge">Deployed on GitHub Pages</span> -->
+        </div>
+        <div class="cta">
+          
+          <!-- <a class="btn" href="https://aung2799.github.io/portfolio/string-theory" target="_blank" rel="noopener">🔗 Live Demo</a> -->
+          <a class="btn secondary" href="https://github.com/Aung2799/string-theory" target="_blank" rel="noopener">⭐ GitHub Repo</a>
+          <a class="btn secondary" href="#video">▶ Watch Demo</a>
+        </div>
+      </div>
+      <div class="cover" aria-label="Project cover image">
+        <img src="string-theory.png" alt="String Theory app screenshot placeholder" />
+      </div>
+    </header>
+
+    <section aria-labelledby="features">
+      <h2 id="features" class="section-title">Highlights</h2>
+      <p class="section-sub">Core features built for real guitarists who need fast chords, clean formatting, and hands‑free playing.</p>
+      <div class="grid">
+        <article class="card">
+          <h3>Paste‑Link Scraping</h3>
+          <p>Paste a chord page URL (e.g., E‑Chords). The server uses <span class="mono">Node.js + Puppeteer</span> to fetch, sanitize, and return structured chords + lyrics.</p>
+        </article>
+        <article class="card">
+          <h3>Transpose in Browser</h3>
+          <p>Chords are wrapped with <span class="mono">&lt;span data-chord&gt;</span> so the page can shift keys instantly with JavaScript.</p>
+        </article>
+        <article class="card">
+          <h3>Auto‑Scroll</h3>
+          <p>Hands‑free scroll with adjustable speeds (0.25×, 0.5×, 1×, 2×, 3×, 4×) for live playing and practice.</p>
+        </article>
+        <article class="card">
+          <h3>Favorites</h3>
+          <p>Save songs into a favorites list for one‑tap access. Stored via MySQL with simple PHP endpoints.</p>
+        </article>
+        <article class="card">
+          <h3>Admin Panel</h3>
+          <p>Manage songs, edit chords/lyrics separately, and keep data clean. Admins can add local songs that support transpose.</p>
+        </article>
+        <article class="card">
+          <h3>Light/Dark Mode</h3>
+          <p>Simple theme toggle that only swaps background/text colors — consistent with the portfolio’s global setting.</p>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="tech">
+      <h2 id="tech" class="section-title">Tech Stack</h2>
+      <p class="section-sub">Focused, practical stack that ships quickly but still scales.</p>
+      <div class="chips">
+        <span class="chip">PHP 8</span>
+        <span class="chip">MySQL</span>
+        <span class="chip">JavaScript (Vanilla)</span>
+        <span class="chip">Node.js</span>
+        <span class="chip">Puppeteer</span>
+        <span class="chip">Cheerio (parsing)</span>
+        <span class="chip">HTML/CSS</span>
+      </div>
+    </section>
+
+    <section id="video" aria-labelledby="demo">
+      <h2 id="demo" class="section-title">Short Demo</h2>
+      <p class="section-sub">Drop a 15–30s clip here showing paste‑link ➜ load ➜ transpose ➜ auto‑scroll ➜ favorite.</p>
+      <div class="media">
+        <div class="frame">
+          <video controls poster="https://dummyimage.com/1280x720/111827/ffffff&text=Demo+Video+Placeholder">
+            <source src="" type="video/mp4" />
+            Your browser does not support HTML5 video.
+          </video>
+        </div>
+        <div class="frame">
+          <img src="https://dummyimage.com/1280x720/f59e0b/0b0b0c&text=Favorites+%E2%80%94+Before+%26+After" alt="Favorites flow placeholder" />
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="how">
+      <h2 id="how" class="section-title">How it works</h2>
+      <p class="section-sub">A fast server scrape + clean client rendering.</p>
+      <div class="steps">
+        <div class="step">
+          <strong>1) Paste Link</strong>
+          The user drops an E‑Chords URL. Validated in PHP, enqueued for a Node worker.
+        </div>
+        <div class="step">
+          <strong>2) Scrape & Normalize</strong>
+          Puppeteer loads the page, waits for chords, extracts HTML, and Cheerio maps chords to <span class="mono">&lt;span data-chord&gt;</span>.
+        </div>
+        <div class="step">
+          <strong>3) Serve JSON ➜ Render</strong>
+          Server returns structured JSON to PHP/JS. The page renders chords above lyrics with transpose + auto‑scroll enabled.
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="code">
+      <h2 id="code" class="section-title">Tiny Code Peek</h2>
+      <p class="section-sub">Example of client‑side transposition using <span class="mono">data-chord</span> spans.</p>
+      <div class="code">
+        <pre><code class="mono">// shifts chord up N semitones
+function transposeChord(chord, n){
+  const steps = ["C","C#","D","D#","E","F","F#","G","G#","A","A#","B"];
+  const i = steps.findIndex(x => chord.toUpperCase().startsWith(x));
+  if(i &lt; 0) return chord;
+  const next = steps[(i + n + steps.length) % steps.length];
+  return next + chord.slice(steps[i].length);
+}
+
+function transposeAll(n){
+  document.querySelectorAll('[data-chord]').forEach(el => {
+    el.textContent = transposeChord(el.textContent, n);
+  });
+}
+</code></pre>
+      </div>
+    </section>
+
+    <section aria-labelledby="links">
+      <h2 id="links" class="section-title">Links</h2>
+      <div class="chips">
+        <!-- <a class="chip" href="https://aung2799.github.io/portfolio/string-theory" target="_blank" rel="noopener">Live App</a> -->
+        <a class="chip" href="https://github.com/Aung2799/string-theory" target="_blank" rel="noopener">GitHub Repository</a>
+        <a class="chip" href="#">Documentation (README)</a>
+      </div>
+    </section>
+
+    <section aria-labelledby="faq">
+      <h2 id="faq" class="section-title">FAQ</h2>
+      <details>
+        <summary>Is the scraper reliable?</summary>
+        <p>Yes. It uses a headless browser (Puppeteer) and waits for the DOM. If a site changes markup, Cheerio mappings can be updated without touching the UI.</p>
+      </details>
+      <details>
+        <summary>Can I add local songs without scraping?</summary>
+        <p>Yes. The admin panel supports manual song creation. Chords and lyrics are stored separately in MySQL to keep transpose accurate.</p>
+      </details>
+      <details>
+        <summary>Does dark mode only change background/text colors?</summary>
+        <p>Correct. This page uses a simple theme switch that only flips <span class="mono">--bg</span> and <span class="mono">--fg</span> tokens, consistent with your preference.</p>
+      </details>
+    </section>
+
+    <footer>
+      Built by Aung Kaung Myat — 2025. Personal portfolio.
+    </footer>
+  </div>
+
+  <script>
+    // ===== Theme toggle (only bg/fg) =====
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const label = document.getElementById('themeLabel');
+
+    function setTheme(t){
+      root.setAttribute('data-theme', t);
+      localStorage.setItem('portfolio_theme', t);
+      label.textContent = t === 'dark' ? 'Dark' : 'Light';
+      btn.setAttribute('aria-label', `Switch theme (current: ${t === 'dark' ? 'Dark' : 'Light'})`);
+      btn.title = t === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode';
+    }
+
+    (function init(){
+      const saved = localStorage.getItem('portfolio_theme');
+      const initial = saved || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      setTheme(initial);
+    })();
+
+    btn.addEventListener('click', () => {
+      const now = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      setTheme(now);
+    });
+  </script>
 </body>
 </html>
